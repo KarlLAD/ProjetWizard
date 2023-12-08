@@ -39,7 +39,6 @@ function next(nombre) {
 function prevent() {
   window.history.back();
   console.log("precedent");
-  alert("précédent");
 }
 
 // Revenir à la première page

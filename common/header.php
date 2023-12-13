@@ -12,8 +12,7 @@
 
     <!-- <script src="../App.jsx"></script> -->
 
-    <script src="/commonjs/function.js"></script>
-
+    <!-- <script src="/commonjs/function.js"></script> -->
 
     <script>
     window.addEventListener("load", function() {
@@ -35,13 +34,22 @@
     });
     </script>
 
+    <script src="../commonjs/function.js"></script>
 </head>
 
 <body>
+
     <section class="header">
         <div class="content">
             <h1> Nom du tiers (propect, client, fournisseur)
             </h1>
+
+            <!-- <script>
+            window.location.href = function() {
+                etapes();
+            }
+            </script> -->
+
         </div>
 
     </section>

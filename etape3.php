@@ -48,7 +48,7 @@
         </form>
 
 
-        <button class="buttonSuivant" type="submit" onclick="prevent();">Précédent </button>
+        <button class="buttonSuivant" type="submit" onclick="prevent(3);">Précédent </button>
         <button class="buttonSuivant" type="submit" onclick="next(3);">Suivant </button>
         <button class="buttonSuivant" type="submit" onclick="reset();">Début </button>
 

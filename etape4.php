@@ -27,9 +27,9 @@
 
             </form>
 
-            <button class="buttonSuivant" type="submit" onclick="prevent();">Précédent </button>
-            <button class="buttonSuivant" type="submit" onclick="getName();next(4);">Récapitulatif </button>
-            <button class="buttonSuivant" type="submit" onclick="reset();">Début </button>
+            <button class="buttonPage" type="submit" onclick="prevent(4);">Précédent </button>
+            <button class="buttonPage" type="submit" onclick="next(4);">Récapitulatif </button>
+            <button class="buttonPage" type="submit" onclick="reset();">Début </button>
         </section>
 
     </div>

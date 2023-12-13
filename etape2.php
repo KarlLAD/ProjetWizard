@@ -9,6 +9,7 @@ window.addEventListener("load", function() {
     );
 });
     </script>
+
     <div>
 
         <h1 class="upload">Etape 2</h1>
@@ -41,13 +42,9 @@ window.addEventListener("load", function() {
                 </fieldset>
 
             </form>
-
-            <button class="buttonSuivant" type="submit" onclick="prevent();">Précédent </button>
-            <button class="buttonSuivant" type="submit" onclick="next(2);">Suivant </button>
-            <button class="buttonSuivant" type="submit" onclick="reset();">Début </button>
-
-
-
+            <button class="buttonPage" type="submit" onclick="prevent(2);">Précédent </button>
+            <button class="buttonPage" type="submit" onclick="next(2);">Suivant </button>
+            <button class="buttonPage" type="submit" onclick="reset();">Début </button>
         </section>
 
     </div>

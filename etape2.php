@@ -7,13 +7,12 @@ window.addEventListener("load", function() {
     console.log(
         "etape 2"
     );
+
 });
     </script>
 
+
     <div>
-
-        <h1 class="upload">Etape 2</h1>
-
         <section class="etape2">
 
             <!--  -->

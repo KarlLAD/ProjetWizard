@@ -34,6 +34,10 @@
     });
     </script>
 
+
+    <script src="../commonjs/main.js"></script>
+
+
     <script src="../commonjs/function.js"></script>
 </head>
 

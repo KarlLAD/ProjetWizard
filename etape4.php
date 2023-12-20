@@ -3,13 +3,12 @@
     <script src="/commonjs/function.js"></script>
 
     <div>
-        <h1 class="produits">Etape 4</h1>
 
         <section class="etape4">
 
             <form action="#" method="POST">
                 <fieldset class="display:inline">
-                    <legend> Etape 3 : Information du bâtiment</legend>
+                    <legend> Etape 4 : Choix du chauffe-eau solaire</legend>
 
                     <!--Produits  -->
                     <div class="product">

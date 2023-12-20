@@ -3,13 +3,12 @@
 <body>
 
 
-
     <script type="text/javascript" src="./commonjs/function.js"></script>
 
     <section class="etape1">
 
         <!--  -->
-        <form action="#" @csrf>
+        <form action="#" @csrf method="POST">
 
 
             <fieldset class="display:inline">
@@ -17,7 +16,7 @@
 
                 <div class="name-tiers">
                     <label class="label-name" for="name">Nom du tiers :</label>
-                    <input type="text" id="name" name="name" size="150" placeholder="nom du tiers" required>
+                    <input type="text" id="name" name="name" size="150" placeholder="nom du tiers">
                 </div>
 
                 <!-- Saisie de l'adresse -->
@@ -25,7 +24,7 @@
                 <div class="adress">
                     <label class="label-adress" for="adress">Adresse :</label>
 
-                    <input type="text" value="Street address" id="adress" name="adress" size="200" required>
+                    <input type="text" id="adress" name="adress" size="200" placeholder="Street address">
                 </div>
 
                 <!-- Saisie de code postal et de la ville -->
@@ -35,14 +34,14 @@
                     <div>
                         <label class="label-zip" for="zip">Code postal :</label>
 
-                        <input type="number" placeholder="Code postal" id="zip" name="zip" min="0">
+                        <input type="number" id="zip" name="zip" min="0" placeholder="Code postal">
                     </div>
 
                     <!-- Pour la ville -->
                     <div>
                         <label class="label-city" for="city">Ville :</label>
 
-                        <input type="text" value="City" id="city" name="city" placeholder="City">
+                        <input type="text" id="city" name="city" placeholder="City">
 
                     </div>
 
@@ -50,15 +49,15 @@
 
                 <!-- Saisie des téléphones -->
                 <div class="phones">
-                    <div class="phone1">
-                        <label class="label-phone1" for="phone1">Téléphone 1 :</label>
-                        <input type="tel" id="phone1" name="phone1" placeholder="00-00-00-00-00">
+                    <div class="phone">
+                        <label class="label-phone" for="phone">Téléphone :</label>
+                        <input type="tel" id="phone" name="phone" placeholder="00-00-00-00-00">
                     </div>
 
-                    <div class="phone2">
-                        <label class="label-phone2" for="phone2">Téléphone 2 :</label>
+                    <div class="mobile">
+                        <label class="label-mobile" for="mobile">Téléphone mobile :</label>
 
-                        <input type="tel" id="phone2" name="phone2" placeholder="00-01-01-01-01">
+                        <input type="tel" id="mobile" name="mobile" placeholder="00-01-01-01-01">
                     </div>
 
                     <!-- Saisie Email -->
@@ -99,7 +98,7 @@
                             <option value="Isère">38 - Isère</option>
                             <option value="Réunion">974 -
                                 Réunion</option>
-                            <!-- Add more countries as needed -->
+                            <!-- Add more department as needed -->
                         </select>
                     </div>
 
@@ -107,16 +106,17 @@
             </fieldset>
 
 
-
-
         </form>
 
 
 
 
-        <!-- <button class="buttonSuivant" type="submit" onclick="getDatas();next(1)">Suivant </button> -->
 
-        <button class="buttonPage" id="#btn-next" type="submit" onclick="getDatas1();next(1);">Suivant </button>
+
+        <button class="buttonPage" id="#btn-next" type="submit" onclick=" let datas = getDatas1();">Suivant
+            test</button>
+        <button class="buttonPage" id="#btn-next" type="submit"
+            onclick=" let datas = getDatas1(); next(1);">Suivant</button>
         <button class="buttonPage" id="#btn-reset" type="submit" onclick="reset();">Début </button>
 
         <!-- <button

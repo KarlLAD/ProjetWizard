@@ -2,7 +2,7 @@
 <script src="/commonjs/function.js"></script>
 
 <div>
-    <h1 class="Information">Etape 3</h1>
+
 
     <section class="etape3">
 

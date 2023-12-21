@@ -6,12 +6,13 @@ async function getDatas1() {
     adress: "",
     zip: "",
     city: "",
-    phone1: 0,
-    phone2: 0,
+    phone1: null,
+    phone2: null,
     email: "",
     country: "",
     dpt: "",
   };
+
   dataEtape1.nameTier = await document.getElementById("name").value;
   dataEtape1.adress = await document.getElementById("adress").value;
   dataEtape1.zip = await document.getElementById("zip").value;
@@ -52,10 +53,30 @@ function prevent(actualPage) {
 }
 
 // Revenir à la première page
-function reset() {
+function home() {
   actualPage = 1;
   window.location.href = "/index.php";
   return actualPage;
+}
+
+//réinitialisé toutess les pages web
+function reset() {
+  //etape 1
+  document.getElementById("name").value = "";
+  document.getElementById("address1").value = "";
+  document.getElementById("zip").value = "";
+  document.getElementById("city").value = "";
+  document.getElementById("phone").value = null;
+  document.getElementById("mobile").value = null;
+  document.getElementById("Email").value = "";
+  document.getElementById("country").value = "";
+  document.getElementById("dpt").value = "";
+
+  // etape2
+
+  // etape3
+
+  // etape4
 }
 
 function recapitulatif() {

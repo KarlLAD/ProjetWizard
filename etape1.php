@@ -5,6 +5,68 @@
 
     <script type="text/javascript" src="./commonjs/function.js"></script>
 
+    <?php
+    // la connexion à la base de données
+        $servername = "localhost";
+        $username = "root" ;
+        $password = "" ;
+        $dbname = "projetwizard";
+
+
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname",$username,$password );
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+             echo "la connexion a ete bien etablie" ;
+
+        } catch (PDOException $e) {
+           //message d'erreur
+           echo "la connexion a echoué : " . $e->getMessage();
+        }
+
+
+        if (isset( $_POST['suivant'] )) {
+
+           $id= $_POST['id'];
+           $create_time= $_POST['create_time'];
+           $update_time= $_POST['update_time'];
+           $nameTier = $_POST['nameTier'];
+           $address1 = $_POST['address1'];
+           $zip = $_POST['zip'];
+           $city = $_POST['city'];
+           $phone = $_POST['phone'];
+           $mobile = $_POST['mobile'];
+           $country = $_POST['country'];
+           $dpt = $_POST['dpt'];
+           $Email = $_POST['Email'];
+
+           $sql = ("INSERT INTO `addresstier`( ` id` , `create_time`, `update_time`,  `nameTier`, `address1`, `zip`, `city`, `phone`, `mobile`, 
+           `country`, `dpt`, `Email`) 
+                        VALUES( :id, :create_time, :update_time,  :nameTier, :address1, : zip, :city, :phone, :mobile, :country, :dpt, :Email )");
+            $stmt = $conn->prepare($sql);
+
+
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':create_time', $create_time);
+            $stmt->bindParam(':update_time', $update_time);
+            $stmt->bindParam(':nameTier', $nameTier);
+            $stmt->bindParam(':address1', $address1);
+            $stmt->bindParam(':zip', $zip);
+            $stmt->bindParam(':city', $city);
+            $stmt->bindParam(':phone', $phone);
+            $stmt->bindParam(':mobile', $mobile);
+            $stmt->bindParam(':country', $country); 
+            $stmt->bindParam(':dpt', $dpt);
+            $stmt->bindParam(':Email', $Email);
+                $stmt->execute();
+                $stmt->close();
+                        
+            // pour changer deux ou plus dans une seul fois clique sur ctrl + d
+        }
+
+        
+
+?>
+
     <section class="etape1">
 
         <!--  -->
@@ -16,15 +78,15 @@
 
                 <div class="name-tiers">
                     <label class="label-name" for="name">Nom du tiers :</label>
-                    <input type="text" id="name" name="name" size="150" placeholder="nom du tiers">
+                    <input type="text" id="nameTier" name="nameTier" size="150" placeholder="nom du tiers">
                 </div>
 
                 <!-- Saisie de l'adresse -->
 
-                <div class="adress">
-                    <label class="label-adress" for="adress">Adresse :</label>
+                <div class="address1">
+                    <label class="label-address1" for="address1">Adresse :</label>
 
-                    <input type="text" id="adress" name="adress" size="200" placeholder="Street address">
+                    <input type="text" id="address1" name="address1" size="10000" placeholder="Street address">
                 </div>
 
                 <!-- Saisie de code postal et de la ville -->
@@ -62,10 +124,10 @@
 
                     <!-- Saisie Email -->
 
-                    <div class="email">
-                        <label class="label-email" for="email">EMail :
+                    <div class="Email">
+                        <label class="label-Email" for="Email">EMail :
                         </label>
-                        <input type="email" placeholder="name@exemple.com" id="email" name="email" size="150"
+                        <input type="email" placeholder="name@exemple.com" id="Email" name="Email" size="150"
                             minlength="3">
 
                     </div>
@@ -104,7 +166,12 @@
 
                 </div>
             </fieldset>
-
+            <!-- les boutons -->
+            <button class="buttonPage" id="#btn-next" type="submit" name="suivant"
+                onclick="getDatas1(); next(1);">Suivant</button>
+            <button class="buttonPage" id="#btn-reset" type="submit" onclick="home();">Début </button>
+            <input type="submit" value="reset" name="reset">
+            <input type="submit" value="suivant input" name="suivant input">
 
         </form>
 
@@ -113,11 +180,8 @@
 
 
 
-        <button class="buttonPage" id="#btn-next" type="submit" onclick=" let datas = getDatas1();">Suivant
-            test</button>
-        <button class="buttonPage" id="#btn-next" type="submit"
-            onclick=" let datas = getDatas1(); next(1);">Suivant</button>
-        <button class="buttonPage" id="#btn-reset" type="submit" onclick="reset();">Début </button>
+
+
 
         <!-- <button
                                 type="button"

@@ -8,7 +8,7 @@ error_reporting(1);
 
 // déclaration des variables 
 
-$_SESSION['nameTier'] =  "Tatiana";
+$_SESSION['nameTier'] =  "";
 $_SESSION['address1'] =  "Jambette";
 $_SESSION['zip'] =  "97200";
 $_SESSION['city'] =  "LAMENTIN";

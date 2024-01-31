@@ -31,20 +31,42 @@ async function getDatas1() {
   return dataEtape1;
 }
 
+// définition des fonctions des étapes
+function validerPage1() {
+  //Ajoutez votre logique de validation pour l'étape 1 ici
+  return true;
+}
+function validerPage2() {
+  //Ajoutez votre logique de validation pour l'étape 2 ici
+  return true;
+}
+function validerPage3() {
+  //Ajoutez votre logique de validation pour l'étape 3 ici
+  return true;
+}
+function validerPage4() {
+  //Ajoutez votre logique de validation pour l'étape 4 ici
+  return true;
+}
+function validerPage5() {
+  //Ajoutez votre logique de validation pour l'étape 5 ici
+  return true;
+}
+
 // valider les pages du formulaire
 
-function ValiderPage(actualPage) {
+function validerPage(actualPage) {
   switch (actualPage) {
     case 1:
-      return ValiderPage1();
+      return validerPage1();
     case 2:
-      return ValiderPage2();
+      return validerPage2();
     case 3:
-      return ValiderPage3();
+      return validerPage3();
     case 4:
-      return ValiderPage4();
+      return validerPage4();
     case 5:
-      return ValiderPage5();
+      return validerPage5();
 
     default:
       return false;
@@ -55,66 +77,121 @@ function ValiderPage(actualPage) {
 function nextPage(actualPage) {
   const isValid = validerPage(actualPage - 1);
 
-  console.log("isValid :", isValid);
-  // actualPage = actualPage + 1;
-  // url = "../etape" + actualPage + ".php";
+  // console.log("isValid :", isValid);
+  if (!isValid) {
+    return;
+  }
+  const currentPage = document.getElementById("step" + (actualPage - 1));
+  const nextPageElement = document.getElementById("step" + actualPage);
 
-  // console.log("url : ", url);
-  // console.log("windows.location :", window.location);
-  // window.location.href = url;
+  // console.log("currentPage :", currentPage);
+  // console.log("nextPageElement :", nextPageElement);
 
-  return actualPage;
+  // Vérification si les éléments existent
+  if (!currentPage || !nextPageElement) {
+    console.error(
+      "Element not found :",
+      !currentPage ? "currentPage" : "nextPageElement"
+    );
+    return;
+  }
+
+  currentPage.style.display = "none";
+  nextPageElement.style.display = "block";
 }
 
-// Revenir à la page précédent
+// Revenir à la page précédente
 function previousPage(actualPage) {
-  actualPage = actualPage - 1; // window.history.back();
+  const isValid = validerPage(actualPage);
 
-  url = "../etape" + actualPage + ".php";
-  etape = actualPage;
-  // console.log("url : ", url);
-  window.location.href = url;
-  // console.log("precedent : ", actualPage);
-  // windows.history.go(-1);
-  // location.href = document.referrer;
-  return actualPage;
+  // console.log("isValid :", isValid);
+  if (!isValid) {
+    return;
+  }
+  const currentPage = document.getElementById("step" + (actualPage + 1));
+  const previousPageElement = document.getElementById("step" + actualPage);
+
+  // console.log("currentPage :", currentPage);
+  // console.log("previousPageElement :", previousPageElement);
+
+  // Vérification si les éléments existent
+  if (!currentPage || !previousPageElement) {
+    console.error(
+      "Element not found :",
+      !currentPage ? "currentPage" : "previousPageElement"
+    );
+    return;
+  }
+
+  currentPage.style.display = "none";
+  previousPageElement.style.display = "block";
 }
 
 // Revenir à la première page du formulaire
-function home() {
-  actualPage = 1;
-  window.location.href = "../index.php";
-  return false;
+function home(actualPage) {
+  const isValid = validerPage(actualPage);
+
+  if (!isValid) {
+    return;
+  }
+  const currentPage = document.getElementById("step" + actualPage);
+  const previousPageElement = document.getElementById("step1");
+
+  console.log("currentPage :", currentPage);
+  console.log("previousPageElement :", previousPageElement);
+
+  // Vérification si les éléments existent
+  if (!currentPage || !previousPageElement) {
+    console.error(
+      "Element not found :",
+      !currentPage ? "currentPage" : "previousPageElement"
+    );
+    return;
+  }
+
+  currentPage.style.display = "none";
+  previousPageElement.style.display = "block";
 }
 
-//réinitialisé toutess les pages web
-function reset(actualPage) {
+//réinitialisé toutes les pages web
+function resetPage(actualPage) {
   switch (actualPage) {
-    case 1:
-      {
-        //etape 1
-        document.getElementById("name").value = "";
-        document.getElementById("address1").value = "";
-        document.getElementById("zip").value = "";
-        document.getElementById("city").value = "";
-        document.getElementById("phone").value = null;
-        document.getElementById("mobile").value = null;
-        document.getElementById("Email").value = "";
-        document.getElementById("country").value = "";
-        document.getElementById("dpt").value = "";
-      }
+    case 1: {
+      //etape 1
+      document.getElementById("nameTier").value = "";
+      document.getElementById("address1").value = "";
+      document.getElementById("zip").value = "";
+      document.getElementById("city").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("mobile").value = "";
+      document.getElementById("Email").value = "";
+      document.getElementById("country").value = "";
+      document.getElementById("dpt").value = "";
 
-      break;
+      return;
+    }
 
     case 2: {
       // etape 2
       document.getElementById("passport").value = "";
       document.getElementById("facture").value = "";
       document.getElementById("rib").value = "";
+      return;
     }
 
     case 3: {
       // etape3
+
+      document.getElementById("fiscal").value = "";
+      document.getElementById("nbpersonnes").value = 1;
+      document.getElementById("loc").value = "Propriétaire";
+      return;
+    }
+
+    case 4: {
+      // etape3
+      document.getElementById("product").value = "";
+      return;
     }
 
     default:
@@ -163,7 +240,7 @@ isValidFrenchPhoneNumber = (phonenumber) => {
 
 // validation
 
-function valider() {
+function validerForm() {
   var valide = document.getElementByName("validation");
   console.log("valide :", valide);
   alert("valider");

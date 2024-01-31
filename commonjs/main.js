@@ -27,9 +27,6 @@ function infosTier(etape) {
   }
 }
 
-function etape(etape) {
-  window.location.href = "/etape" + etape + ".php";
-}
 function etape1() {
   window.location.href = "/etape1.php";
 }
@@ -48,5 +45,3 @@ function etape5() {
 function index() {
   window.location.href = "/index.php";
 }
-
-index;

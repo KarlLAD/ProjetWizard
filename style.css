@@ -2,7 +2,8 @@
 
 
 legend {
-  background-color: #000;
+  /* background-color: #000; */
+  background-color: red;
   color: #fff;
   padding: 3px 6px;
 }
@@ -10,3 +11,55 @@ legend {
 input {
   margin: 0.4rem;
 }
+
+
+
+/* section  div .display-etape1 {
+  background-color: orange;
+  margin: 50px;
+  height: 30px;
+  width: 100px;
+  padding : 30px;
+
+} */
+
+section div ul {
+
+  background-color:#CFCFCF;
+  height: 15px;
+  width: 600px;
+
+  display: flex;
+  flex :1;
+ list-style-type: none; /*  enlever les petits points  */
+  align-items: center;
+justify-content: space-between;
+
+border-style: groove;
+border-color: #000;
+top: 0;
+margin: 100px;
+padding: 0;
+
+
+}
+
+section ul .step {
+  height: 30px;
+  width: 30px;
+font-size: 1.9rem;
+
+border-radius: 100%;
+border-style: groove;
+border-color: red;
+color:#000;
+background-color: white;
+padding-left: 10px;
+padding-top: 10px;
+padding-bottom: 10px;
+
+
+
+}
+
+

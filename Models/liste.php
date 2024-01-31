@@ -1,7 +1,13 @@
+<script type="text/javascript" src="/commonjs/function.js"></script>
+
 <?php
 
 include("accessDB.php");
 include("addressTier.php");
+include("crud.php");
+$datas = [];
+
+
 
 // Lister les données de la base de données s'il y a des données
 
@@ -13,7 +19,10 @@ include("addressTier.php");
     // Préparation de la requête
         $resultat = $conn->prepare($sql);
 
-       $datas= $resultat->execute(array());
+        //récupère tous sous forme de tableau
+       $resultat->execute(array());
+
+       $datas = $resultat->fetchAll() ;
         
 
 
@@ -30,13 +39,29 @@ include("addressTier.php");
    
 $conn = null; // Fermer la connexion PDO
 
+echo "<br>type of datas : ".gettype($datas);
 
+foreach ($datas as $data ) {
+    
+    $id = $data['id'];
+    $nameTier = $data['nameTier'] ;
+    $create_time = $data['create_time'] ;
+    $update_time = $data['update_time'] ;
+    
+
+
+
+    echo "<br> id :".$id."  nameTier :".$nameTier."  " ;
+
+    echo '<span>'.$create_time.' </span>' ;
 ?>
+<tr>
+    <a href="/Models/editionTier/etape1.php" class="edit" onclick="editData($data);">edit</a>
+
+</tr>
+<tr>
+    <a href="#" class="delete">Supprimer</a>
+</tr>
 
 
-<div>
-
-
-
-
-</div>
+<?php }   ?>

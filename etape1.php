@@ -1,221 +1,163 @@
+<!-- style -->
+<link rel="stylesheet" href="style.css">
 <!-- formulaire de saisie -->
 
-<script type="text/javascript" src="./commonjs/function.js"></script>
-<!-- lien pour input phone et mobile -->
 <script type="text/javascript" src="/commonjs/function.js"></script>
+
+
 
 
 
 <?php
 
-// la connexion à la base de données
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "projetwizard";
+include("./hero.php");
+// valeur par défaut pour $_SESSION
+
+   // header('Location: /etape1.php' );
+    // exit;
 
 
-// connexion sur serveur avec PDO 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "La connexion a été bien établie";
-} catch (PDOException $e) {
-    echo "La connexion a échoué : " . $e->getMessage();
-}
-
-
-if (isset($_POST["nameTier"]) && $_POST["suivant"] ) {
-
-    try {
-
-        // Récpérer les valeurs du formulaire
-
-        $nameTier = TRIM($_POST['nameTier']);
-        $address1 = $_POST['address1'];
-        $zip = intval($_POST['zip']);
-        $city = TRIM($_POST['city']);
-        $phone = TRIM($_POST['phone']);
-        $mobile = TRIM($_POST['mobile']);
-        $Email = TRIM($_POST['Email']);
-        $country = TRIM($_POST['country']);
-        $dpt = TRIM($_POST['dpt']);
-        $create_time = date('d-m-y h:i:s');
-        $update_time = $create_time ;
-
-        // Requête SQL d'insertion
-        $sql = "INSERT INTO `addresstier` ( `id`, `create_time`, `update_time`, `nameTier`, `address1`, `zip`, `city`, `phone`, `mobile`, `Email`, `country`, `dpt`)
-                VALUES (:id, :create_time, :update_time, :nameTier, :address1, :zip, :city, :phone, :mobile, :Email, :country, :dpt)";
-
-        // Préparation de la requête
-        $stmt = $conn->prepare($sql);
-
-        // Liaison des paramètres
-
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':create_time', $create_time);
-        $stmt->bindParam(':update_time', $update_time);
-        $stmt->bindParam(':nameTier', $nameTier);
-        $stmt->bindParam(':address1', $address1);
-        $stmt->bindParam(':zip', $zip);
-        $stmt->bindParam(':city', $city);
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':mobile', $mobile);
-        $stmt->bindParam(':Email', $Email);
-        $stmt->bindParam(':country', $country);
-        $stmt->bindParam(':dpt', $dpt);
-
-        // Exécution de la requête
-        $stmt->execute();
-
-        echo "<br> Données insérées avec succès";
-            header('Location: index.php' );
-            exit;
-    } catch (PDOException $e) {
-        echo "<br> Erreur lors de l'insertion des données : " . $e->getMessage();
-    }
-
-    $conn = null; // Fermer la connexion PDO
-                
-
-// header('Location: /etape1.php' );
-// exit;
-
-
-}
-
-$phone = $_POST['phone'];
 ?>
 
-<section class="etape1">
+<section>
+    <div>
 
-    <!--  -->
-    <form action="etape1.php" @csrf method="POST">
-        <!-- submit_form.php -->
+        <!--  -->
+        <form action="etape2.php" @csrf method="POST" name="form1">
 
-        <fieldset class="display:inline">
-            <legend> Nom du tiers</legend>
+            <fieldset class="display:inline">
+                <legend> Nom du tiers</legend>
 
-            <div class="name-tiers">
-                <label class="label-name" for="name">Nom du tiers :</label>
-                <input type="text" id="nameTier" name="nameTier" size="150" placeholder="nom du tiers">
-            </div>
-
-            <!-- Saisie de l'adresse -->
-
-            <div class="address1">
-                <label class="label-address1" for="address1">Adresse :</label>
-
-                <input type="text" id="address1" name="address1" size="10000" placeholder="Street address">
-            </div>
-
-            <!-- Saisie de code postal et de la ville -->
-            <div class="zip-ville">
-
-                <!-- Pour le code postal -->
-                <div>
-                    <label class="label-zip" for="zip">Code postal :</label>
-
-                    <input type="text" id="zip" name="zip" placeholder="Code postal">
+                <div class="name-tiers">
+                    <label class="label-name" for="nameTier">Nom du tiers :</label>
+                    <input type="text" id="nameTier" name="nameTier" size="150" placeholder="nom du tiers"
+                        value="<?php if(isset($_SESSION['nameTier'])) echo $_SESSION['nameTier']; ?>">
                 </div>
 
-                <!-- Pour la ville -->
-                <div>
-                    <label class="label-city" for="city">Ville :</label>
+                <!-- Saisie de l'adresse -->
 
-                    <input type="text" id="city" name="city" placeholder="City">
+                <div class="address1">
+                    <label class="label-address1" for="address1">Adresse :</label>
 
+                    <input type="text" id="address1" name="address1" size="10000" placeholder="Street address">
                 </div>
 
-            </div>
+                <!-- Saisie de code postal et de la ville -->
+                <div class="zip-ville">
 
-            <!-- Saisie des téléphones -->
-            <div class="phones">
-                <div class="phone">
-                    <label class="label-phone" for="phone">Téléphone :</label>
-                    <input type="text" id="phone" name="phone" placeholder="00-00-00-00-00"
-                        onChange="isValidFrenchPhoneNumber(phone)">
+                    <!-- Pour le code postal -->
+                    <div>
+                        <label class="label-zip" for="zip">Code postal :</label>
+
+                        <input type="text" id="zip" name="zip" placeholder="Code postal">
+                    </div>
+
+                    <!-- Pour la ville -->
+                    <div>
+                        <label class="label-city" for="city">Ville :</label>
+
+                        <input type="text" id="city" name="city" placeholder="City">
+
+                    </div>
 
                 </div>
 
-                <div class=" mobile">
-                    <label class="label-mobile" for="mobile">Téléphone mobile :</label>
+                <!-- Saisie des téléphones -->
+                <div class="phones">
+                    <div class="phone">
+                        <label class="label-phone" for="phone">Téléphone :</label>
+                        <input type="tel" id="phone" name="phone" placeholder="00-00-00-00-00" autocomplete="off"
+                            onChange="isValidFrenchPhoneNumber(value)">
 
-                    <input type="tel" id="mobile" name="mobile" placeholder="00-01-01-01-01">
+                    </div>
+
+                    <div class="mobile">
+                        <label class="label-mobile" for="mobile">Téléphone mobile :</label>
+
+                        <input type="tel" id="mobile" name="mobile" placeholder="00-01-01-01-01" autocomplete="off"
+                            onChange="isValidFrenchPhoneNumber(value)">
+                    </div>
+
+                    <!-- Saisie Email -->
+
+                    <div class="Email">
+                        <label class="label-Email" for="Email">EMail :
+                        </label>
+                        <input type="email" placeholder="name@exemple.com" id="Email" name="Email" size="150"
+                            minlength="3" autocomplete="off">
+
+                    </div>
+
+                    <!-- Saisie du pays -->
+
+                    <div class="country">
+                        <label class="label-country" for="country">Pays :</label>
+
+                        <select name="country" id="country" autocomplete="off">
+                            <option value="France">France</option>
+                            <option value="Espagne">Espagne</option>
+                            <option value="Maroc">Maroc</option>
+                            <option value="Australie">Australie</option>
+                            <!-- Add more countries as needed -->
+                        </select>
+
+
+
+                    </div>
+
+                    <!-- Saisie Département/Canton -->
+
+                    <div class="dpt">
+                        <label class="label-dpt" for="dpt">Département/Canton
+                            :</label>
+
+                        <select name="dpt" id="dpt">
+
+                            <option value>Entrez le département</option>
+                            <option value="Martinique">972 - Martinique</option>
+                            <option value="Aion">01 - Aion</option>
+                            <option value="Isère">38 - Isère</option>
+                            <option value="Réunion">974 -
+                                Réunion</option>
+                            <!-- Add more department as needed -->
+                        </select>
+                    </div>
+
                 </div>
+            </fieldset>
+            <br />
+            <!-- les boutons -->
+            <input class="buttonPage" type="submit" value="suivant" name="suivant" onclick="next(1);">
 
-                <!-- Saisie Email -->
+            <input class="buttonPage" id="#btn-reset" type="submit" name="debut" value="debut" onclick="home();">
 
-                <div class="Email">
-                    <label class="label-Email" for="Email">EMail :
-                    </label>
-                    <input type="email" placeholder="name@exemple.com" id="Email" name="Email" size="150" minlength="3">
-
-                </div>
-
-                <!-- Saisie du pays -->
-
-                <div class="country">
-                    <label class="label-country" for="country">Pays :</label>
-
-                    <select name="country" id="country">
-                        <option value="France">France</option>
-                        <option value="Espagne">Espagne</option>
-                        <option value="Maroc">Maroc</option>
-                        <option value="Australie">Australie</option>
-                        <!-- Add more countries as needed -->
-                    </select>
+            <input type="submit" value="reset" name="reset">
 
 
 
-                </div>
+            <!-- <input type="submit" value="suivant input" name="suivant" onclick="next(1);"> -->
 
-                <!-- Saisie Département/Canton -->
 
-                <div class="dpt">
-                    <label class="label-dpt" for="dpt">Département/Canton
-                        :</label>
+            <!-- <button class="buttonPage" id="#suivant" type="submit" name="suivant">suivant test
+        </button> -->
+            <?php echo"<br> avant /form ;". $_SERVER['HTTP_REFERER']  ?>
 
-                    <select name="dpt" id="dpt">
+        </form>
 
-                        <option value>Entrez le département</option>
-                        <option value="Martinique">972 - Martinique</option>
-                        <option value="Ain">01 - Aion</option>
-                        <option value="Isère">38 - Isère</option>
-                        <option value="Réunion">974 -
-                            Réunion</option>
-                        <!-- Add more department as needed -->
-                    </select>
-                </div>
 
-            </div>
-        </fieldset>
-        <!-- les boutons -->
-        <button class="buttonPage" id="#btn-next" type="submit" name="suivant"
-            onclick="getDatas1(); next(1);">Suivant</button>
-        <button class="buttonPage" id="#btn-reset" type="submit" onclick="home();">Début </button>
+
+
+        <?php echo "<br> après /form :".$_SERVER['HTTP_REFERER']  ?>
+
+        <h1> hors form</h1>
+        <input class="buttonPage" type="submit" value="suivant" name="suivant" onclick="next(1);">
+
+        <input class="buttonPage" id="#btn-reset" type="submit" name="debut" value="debut" onclick="home();">
+
         <input type="submit" value="reset" name="reset">
-        <input type="submit" value="suivant input" name="suivant">
-
-        <!-- <button class="buttonPage" id="#btn-reset" type="submit" name="suivant">suivant test
-            </button> -->
 
 
-
-
-
-
-    </form>
-
-
-
-
-
-
-
-
-
-    <!-- <button
+        <!-- <button
                             type="button"
                             id="etape1"
                             onclick="etape2.html"
@@ -228,14 +170,14 @@ $phone = $_POST['phone'];
 
 
 
-    <!-- getName();  -->
+        <!-- getName();  -->
 
-    <!-- <div class="widget">
+        <!-- <div class="widget">
     <button>A button element</button>
 
     <input type="submit" value="suivant jquery">
 
 </div> -->
 
-
+    </div>
 </section>

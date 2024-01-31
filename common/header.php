@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -38,9 +35,6 @@
     </script>
 
 
-    <script src="../commonjs/main.js"></script>
-
-
     <script src="../commonjs/function.js"></script>
 </head>
 
@@ -50,12 +44,6 @@
         <div class="content">
             <h1> Nom du tiers (propect, client, fournisseur)
             </h1>
-
-            <!-- <script>
-            window.location.href = function() {
-                etapes();
-            }
-            </script> -->
 
         </div>
 

@@ -3,13 +3,6 @@
 <?php
 session_start();
 
-// la connexion à la base de données
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "projetwizard";
-
-
 var_dump("<br> base de donnée");
 
 
@@ -28,12 +21,13 @@ var_dump("<br> test validation début");
         /* 
          *  Récpérer les valeurs du formulaire
          * sauvegarder dans la variable
-         * $_SESSION
+         * $_SESSION et sécurisation contre injection
+         * de code dans la base de données
          * 
         */
         //etape 1
 
-        $nameTier = TRIM($_SESSION['nameTier']);
+        $nameTier = addslashes(TRIM($_SESSION['nameTier']));
         $address1 = TRIM($_SESSION['address1']);
         $zip = intval($_SESSION['zip']);
         $city = TRIM($_SESSION['city']);

@@ -6,7 +6,7 @@ session_start();
 <link rel="stylesheet" href="style.css">
 <section>
 
-    <div class="the-steps">
+    <div class="breadcrumb" aria-label="Breadcrumb">
         <ul class="steps">
 
             <li class="step">1</li>
@@ -17,6 +17,9 @@ session_start();
         </ul>
 
     </div>
+
+
+
 
 
 </section>

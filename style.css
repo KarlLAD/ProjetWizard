@@ -3,7 +3,7 @@
 
 legend {
   /* background-color: #000; */
-  background-color: red;
+  background-color: green;
   color: #fff;
   padding: 3px 6px;
 }
@@ -61,5 +61,27 @@ padding-bottom: 10px;
 
 
 }
+
+.breadcrumb {
+
+  padding: 0 .5rem;
+  background-color: blue;
+}
+
+/* .breadcrumb ul {
+
+
+ 
+
+} */
+
+.breadcrumb li:not(:last-child) ::after {
+
+
+  display: inline-flex;
+  background-color: purple;
+  
+}
+
 
 

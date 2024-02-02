@@ -241,10 +241,35 @@ isValidFrenchPhoneNumber = (phonenumber) => {
 // validation
 
 function validerForm() {
-  var valide = document.getElementByName("validation");
-  console.log("valide :", valide);
-  alert("valider");
-  return valide;
+  return true;
+}
+
+// Réinitialiser tous les champs
+function resetAll() {
+  //etape 1
+  document.getElementById("nameTier").value = "";
+  document.getElementById("address1").value = "";
+  document.getElementById("zip").value = "";
+  document.getElementById("city").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("mobile").value = "";
+  document.getElementById("Email").value = "";
+  document.getElementById("country").value = "";
+  document.getElementById("dpt").value = "";
+
+  // etape 2
+  document.getElementById("passport").value = "";
+  document.getElementById("facture").value = "";
+  document.getElementById("rib").value = "";
+
+  // etape3
+
+  document.getElementById("fiscal").value = "";
+  document.getElementById("nbpersonnes").value = 1;
+  document.getElementById("loc").value = "Propriétaire";
+
+  // etape4
+  document.getElementById("product").value = "";
 }
 
 // fonction update

@@ -7,16 +7,18 @@
 <?php
 session_start();
 include("./hero.php");
+$name=session_status();
+echo "<br> session :".$name ;
 
 ?>
 
 <div id="wizard">
     <!-- formualire de l'étape 1 -->
     <div id="step1" class="step">
-        <form action="" @csrf method="POST" name="form1">
+        <form action="#" @csrf method="POST" name="form1">
 
             <fieldset class="display:inline">
-                <legend> Nom du tiers</legend>
+                <legend> Etape1 : Nom du tiers</legend>
 
                 <div class="name-tiers">
                     <label class="label-name" for="nameTier">Nom du tiers :</label>
@@ -28,7 +30,6 @@ include("./hero.php");
 
                 <div class="address1">
                     <label class="label-address1" for="address1">Adresse :</label>
-
                     <input type="text" id="address1" name="address1" size="10000" placeholder="Street address">
                 </div>
 
@@ -38,16 +39,13 @@ include("./hero.php");
                     <!-- Pour le code postal -->
                     <div>
                         <label class="label-zip" for="zip">Code postal :</label>
-
                         <input type="text" id="zip" name="zip" placeholder="Code postal">
                     </div>
 
                     <!-- Pour la ville -->
                     <div>
                         <label class="label-city" for="city">Ville :</label>
-
                         <input type="text" id="city" name="city" placeholder="City">
-
                     </div>
 
                 </div>
@@ -58,12 +56,10 @@ include("./hero.php");
                         <label class="label-phone" for="phone">Téléphone :</label>
                         <input type="tel" id="phone" name="phone" placeholder="00-00-00-00-00" autocomplete="off"
                             onChange="isValidFrenchPhoneNumber(value)">
-
                     </div>
 
                     <div class="mobile">
                         <label class="label-mobile" for="mobile">Téléphone mobile :</label>
-
                         <input type="tel" id="mobile" name="mobile" placeholder="00-01-01-01-01" autocomplete="off"
                             onChange="isValidFrenchPhoneNumber(value)">
                     </div>
@@ -81,8 +77,8 @@ include("./hero.php");
                     <!-- Saisie du pays -->
 
                     <div class="country">
-                        <label class="label-country" for="country">Pays :</label>
-
+                        <label class="label-country" for="country">Pays :
+                        </label>
                         <select name="country" id="country" autocomplete="off">
                             <option value="France">France</option>
                             <option value="Espagne">Espagne</option>
@@ -96,11 +92,9 @@ include("./hero.php");
                     <!-- Saisie Département/Canton -->
 
                     <div class="dpt">
-                        <label class="label-dpt" for="dpt">Département/Canton
-                            :</label>
-
+                        <label class="label-dpt" for="dpt">Département/Canton :
+                        </label>
                         <select name="dpt" id="dpt">
-
                             <option value>Entrez le département</option>
                             <option value="Martinique">972 - Martinique</option>
                             <option value="Aion">01 - Aion</option>
@@ -117,29 +111,29 @@ include("./hero.php");
             <!-- les boutons -->
             <div class="button-form">
 
-                <button type="submit" onclick="nextPage(2)" value="suivant" name="suivant">Suivant</button>
-
-                <button onclick="resetPage(1)">Reset</button>
+                <button onclick="nextPage(2)" value="suivant" name="suivant-test">Suivant</button>
+                <button onclick="resetPage(1)">Reset de l'étape 1</button>
+                <button onclick="resetAll()">Reset tous les champs</button>
 
             </div>
-
 
         </form>
 
     </div>
 
 
-    <!-- formualire de l'étape  2 -->
+    <!-- formulaire de l'étape  2 -->
 
     <div id="step2" class="step" style="display:none;">
-        <section class="etape2" id="etape2">
 
-            <!-- sauvegarde les données du formulaire etape 1 -->
+        <!-- sauvegarde les données du formulaire etape 1 -->
 
-            <?php
+        <?php
 
-    if ((isset($_POST["previous"])) || !empty($_POST["submit"]) ) {
-    var_dump("<br> sauvegarde etape 1");
+        var_dump($_POST);
+    echo("<br> nameTier :   ".$_POST["nameTier"]) ;
+    echo("<br> sauvegarde etape 1");
+
     $_SESSION["nameTier"] = $_POST["nameTier"] ;
     $_SESSION["address1"] = $_POST["address1"] ;
     $_SESSION["zip"] = $_POST["zip"] ;
@@ -149,192 +143,161 @@ include("./hero.php");
     $_SESSION["Email"] = $_POST["Email"] ;
     $_SESSION["country"] = $_POST["country"] ;
     $_SESSION["dpt"] = $_POST["dpt"] ;
-} 
 
 ?>
 
-            <!--  -->
-            <form action="#" @csrf method="POST" name="form2">
-                <fieldset class="display:inline">
-                    <legend> Etape 2 : Entrez les documents</legend>
+        <!--  -->
+        <form action="#" @csrf method="POST" name="form2">
+            <fieldset class="display:inline">
+                <legend> Etape 2 : Entrez les documents</legend>
 
-                    <!-- Upload la pièce d'identité -->
-                    <div class="passport">
-                        <label class for="passport">Pièce d'identité/Passeport :</label>
-                        <input type="file" id="passport" name="passport" placeholder="file1.pdt"
-                            accept="application/pdf, image/*" capture="environment" />
-                    </div>
-
-                    <!-- Justificatif de facture d'électricité  -->
-                    <div class="facture">
-                        <label class for="facture">Facture de EDF :</label>
-                        <input type="file" id="facture" name="facture" accept="application/pdf, image/*"
-                            capture="environment" />
-                    </div>
-
-                    <!-- RIB / RIP  -->
-                    <div class="rib">
-                        <label class="rib" for="rib">RIB/RIP :</label>
-                        <input type="file" id="rib" name="rib" accept="application/pdf, image/*"
-                            capture="environment" />
-                    </div>
-
-                </fieldset>
-                <br />
-                <!-- les boutons -->
-                <div class="button-form">
-
-                    <button onclick="previousPage(1)" value="previous">Précédent</button>
-                    <button onclick="nextPage(3)">Suivant</button>
-                    <button onclick="home(2)">Revenir à l'étape 1</button>
-
-                    <button onclick="resetPage(2)">Reset</button>
-
+                <!-- Upload la pièce d'identité -->
+                <div class="passport">
+                    <label class for="passport">Pièce d'identité/Passeport :</label>
+                    <input type="file" id="passport" name="passport" placeholder="file1.pdt"
+                        accept="application/pdf, image/*" capture="environment" />
                 </div>
 
-            </form>
+                <!-- Justificatif de facture d'électricité  -->
+                <div class="facture">
+                    <label class for="facture">Facture de EDF :</label>
+                    <input type="file" id="facture" name="facture" accept="application/pdf, image/*"
+                        capture="environment" />
+                </div>
 
-        </section>
+                <!-- RIB / RIP  -->
+                <div class="rib">
+                    <label class="rib" for="rib">RIB/RIP :</label>
+                    <input type="file" id="rib" name="rib" accept="application/pdf, image/*" capture="environment" />
+                </div>
+
+            </fieldset>
+            <br />
+            <!-- les boutons -->
+            <div class="button-form">
+
+                <button onclick="previousPage(1)" value="previous" id="previous">Précédent</button>
+                <button onclick="nextPage(3)">Suivant</button>
+                <button onclick="home(2)">Revenir à l'étape 1</button>
+                <button onclick="resetPage(2)">Reset</button>
+
+            </div>
+        </form>
     </div>
 
-    <!-- formualire de l'étape  3 -->
+    <!-- formulaire de l'étape  3 -->
     <div id="step3" class="step" style="display:none;">
 
-        <section class="etape3">
-
-
-            <?php
+        <?php
 
 // sauvegarde les données du formulaire etape 2
-    var_dump("<br> ".$_POST["passport"]);
-if (empty($_POST["previous"])) {
-    var_dump("<br> ".$_POST["passport"]);
-        var_dump("<br> sauvegarde etape 2");
+    echo("<br> ".$_POST["passport"]);
+    echo("<br> sauvegarde etape 2");
 
     $_SESSION["passport"] = $_POST["passport"] ;
     $_SESSION["facture"] = $_POST["facture"] ;
     $_SESSION["rib"] = $_POST["rib"] ;
-
-}
-
-
 ?>
 
-            <!--  -->
-            <form action="etape4.php" @csrf method="POST" name="form3">
-                <fieldset class="display:inline">
-                    <legend> Etape 3 : Information du bâtiment</legend>
+        <!-- Début du formulaire  -->
+        <form action="#" @csrf method="POST" name="form3">
+            <fieldset class="display:inline">
+                <legend> Etape 3 : Information du bâtiment</legend>
 
-                    <!-- Information du bâtiment -->
-                    <div class="fiscal">
-                        <label class="fiscal" for="fiscal">Revenu fiscal :</label>
-                        <input type="number" id="fiscal" name="fiscal" min="0" />
-                    </div>
-
-                    <!-- Nombre de personne dans le logement -->
-                    <div class="nbpersonnes">
-                        <label class="nb" for="nbpersonnes">Nombre de personnes:</label>
-                        <select name="nbpersonnes" id="nbpersonnes">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                    <!-- Proprtiétaire ou locataire -->
-                    <div class="loc">
-                        <label class="loc" for="loc">Statut du résident :</label>
-                        <select name="loc" id="loc">
-                            <option value="Propriétaire">Propriétaire</option>
-                            <option value="Locataire">Locataire</option>
-
-                        </select>
-                    </div>
-
-                </fieldset>
-                <br />
-
-                <!--  les boutons -->
-                <div class="button-form">
-
-                    <button onclick="previousPage(2)" value="previous">Précédent</button>
-                    <button onclick="nextPage(4)">Suivant</button>
-                    <button onclick="home(3)">Revenir à l'étape 1</button>
-
-                    <button onclick="resetPage(3)">Reset</button>
-
+                <!-- Information du bâtiment -->
+                <div class="fiscal">
+                    <label class="fiscal" for="fiscal">Revenu fiscal :</label>
+                    <input type="number" id="fiscal" name="fiscal" min="0" />
                 </div>
 
-            </form>
+                <!-- Nombre de personne dans le logement -->
+                <div class="nbpersonnes">
+                    <label class="nb" for="nbpersonnes">Nombre de personnes:</label>
+                    <select name="nbpersonnes" id="nbpersonnes">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <!-- Proprtiétaire ou locataire -->
+                <div class="loc">
+                    <label class="loc" for="loc">Statut du résident :</label>
+                    <select name="loc" id="loc">
+                        <option value="Propriétaire">Propriétaire</option>
+                        <option value="Locataire">Locataire</option>
+                    </select>
+                </div>
 
-        </section>
+            </fieldset>
+            <br />
+
+            <!--  les boutons -->
+            <div class="button-form">
+
+                <button onclick="previousPage(2)" value="previous">Précédent</button>
+                <button onclick="nextPage(4)">Suivant</button>
+                <button onclick="home(3)">Revenir à l'étape 1</button>
+                <button onclick="resetPage(3)">Reset</button>
+            </div>
+        </form>
 
     </div>
 
-    <!-- formualire de l'étape 4 -->
+    <!-- formulaire de l'étape 4 -->
     <div id="step4" class="step" style="display:none;">
-        <section class="etape4">
 
-
-            <?php
+        <?php
 
 // sauvegarde les données du formulaire etape 3
-if (empty($_POST["previous"])) {
-        var_dump("<br> sauvegarde etape 3");
+
+    echo("<br> sauvegarde etape 3");
 
     $_SESSION["fiscal"] = $_POST["fiscal"] ;
     $_SESSION["nbpersonnes"] = $_POST["nbpersonnes"] ;
     $_SESSION["loc"] = $_POST["loc"] ;
 
-}
-
-
 ?>
 
-            <form action="etape5.php" @csrf method="POST" namespace="form4">
-                <fieldset class="display:inline">
-                    <legend> Etape 4 : Choix du chauffe-eau solaire</legend>
+        <form action="#" @csrf method="POST" namespace="form4">
+            <fieldset class="display:inline">
+                <legend> Etape 4 : Choix du chauffe-eau solaire</legend>
 
-                    <!--Produits  -->
-                    <div class="product">
-                        <label class="product" for="product">Produits Chauffe-eau solaire</label>
-                        <select name="product" id="product">
+                <!--Liste des différents produits  chauffe-eau solaire -->
+                <div class="product">
+                    <label class="product" for="product">Produits Chauffe-eau solaire</label>
+                    <select name="product" id="product">
 
-                            <option value>Type de chauffe-eau solaire</option>
-                            <option value="200L">200L</option>
-                            <option value="300L">300L</option>
+                        <option value>Type de chauffe-eau solaire</option>
+                        <option value="200L">200L</option>
+                        <option value="300L">300L</option>
 
-                        </select>
-                    </div>
-
-                </fieldset>
-                <br />
-                <!-- les boutons -->
-                <div class="button-form">
-
-                    <button onclick="previousPage(3)" value="previous">Précédent</button>
-                    <button onclick="nextPage(5)">Suivant</button>
-                    <button onclick="home(4)">Revenir à l'étape 1</button>
-
-                    <button onclick="resetPage(4)">Reset</button>
-
+                    </select>
                 </div>
-            </form>
 
+            </fieldset>
+            <br />
+            <!-- les boutons -->
+            <div class="button-form">
 
+                <button onclick="previousPage(3)" value="previous">Précédent</button>
+                <button onclick="nextPage(5)">Suivant</button>
+                <button onclick="home(4)">Revenir à l'étape 1</button>
+                <button onclick="resetPage(4)">Reset</button>
 
-        </section>
+            </div>
+        </form>
 
     </div>
 
 
-    <!-- formualire de l'étape  5 -->
+    <!-- formulaire de l'étape  5 -->
     <div id="step5" class="step" style="display:none;">
         <div>
             <h1 class="recap">
@@ -347,19 +310,17 @@ if (empty($_POST["previous"])) {
                     );
                 });
                 </script>
-
-
             </h1>
             <div>
 
                 <?php
-// sauvegarde les données du formulaire etape 4
+// sauvegarde des données du formulaire etape 4
 
 $_SESSION["product"] = $_POST["product"];
 
 ?>
 
-                <form action="validation.php" @csrf methode="POST" name="validation">
+                <form action="#" @csrf methode="POST" name="validation">
 
                     <h2> Les données saisies</h2>
                     <?php 
@@ -386,10 +347,7 @@ $_SESSION["product"] = $_POST["product"];
         echo "<br> Nombre de personnes :  ".$_SESSION['nbpersonnes'] ;
         echo "<br> Locataire/Propriétaire :  ".$_SESSION['loc'] ;
         echo "<br> Produit selectionné :  ".$_SESSION['product'] ;
-
-        
-        
-        ?>
+?>
                     <br />
                     <br />
                     <!-- les boutons -->
@@ -397,9 +355,10 @@ $_SESSION["product"] = $_POST["product"];
 
                         <button onclick="previousPage(4)" value="previous">Précédent</button>
                         <button onclick="home(5)">Revenir à l'étape 1</button>
-
                         <button onclick="resetPage(5)">Reset</button>
-                        <button onclick="validerForm()">Reset</button>
+                        <button onclick="validation.php">Valider le formulaire</button>
+                        <!-- methode a href -->
+                        <a href="validation.php" class="button-form">Validation</a>
 
 
                     </div>
@@ -407,7 +366,4 @@ $_SESSION["product"] = $_POST["product"];
 
 
             </div>
-
-
-
         </div>

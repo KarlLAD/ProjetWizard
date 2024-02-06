@@ -1,12 +1,8 @@
-<?php
-session_start();
-
-
-?>
+<!--  -->
 <link rel="stylesheet" href="style.css">
 <section>
 
-    <div class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb">
         <ul class="steps">
 
             <li class="step">1</li>

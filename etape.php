@@ -7,9 +7,10 @@
 <?php
 session_start();
 include("./hero.php");
-$name=session_status();
-echo "<br> session :".$name ;
 
+// header('Location: /etape.php' );
+//     exit;
+// header('Content-type: text/html; charset=UTF-8');
 ?>
 
 <div id="wizard">
@@ -52,19 +53,22 @@ echo "<br> session :".$name ;
 
                 <!-- Saisie des téléphones -->
                 <div class="phones">
+
+                    <!-- téléphone fixe -->
                     <div class="phone">
                         <label class="label-phone" for="phone">Téléphone :</label>
                         <input type="tel" id="phone" name="phone" placeholder="00-00-00-00-00" autocomplete="off"
                             onChange="isValidFrenchPhoneNumber(value)">
                     </div>
 
+                    <!-- le téléphone fixe -->
                     <div class="mobile">
                         <label class="label-mobile" for="mobile">Téléphone mobile :</label>
                         <input type="tel" id="mobile" name="mobile" placeholder="00-01-01-01-01" autocomplete="off"
                             onChange="isValidFrenchPhoneNumber(value)">
                     </div>
 
-                    <!-- Saisie Email -->
+                    <!-- Saisie de l'adreese Email -->
 
                     <div class="Email">
                         <label class="label-Email" for="Email">EMail :
@@ -111,9 +115,9 @@ echo "<br> session :".$name ;
             <!-- les boutons -->
             <div class="button-form">
 
-                <button onclick="nextPage(2)" value="suivant" name="suivant-test">Suivant</button>
-                <button onclick="resetPage(1)">Reset de l'étape 1</button>
-                <button onclick="resetAll()">Reset tous les champs</button>
+                <button type="submit" onclick="nextPage(2)" value="suivant" name="suivant">Suivant</button>
+                <!-- <input type="submit" onclick="nextPage(2)" value="suivant input" name="suivant"> -->
+                <button onclick="resetAll()">Reset</button>
 
             </div>
 
@@ -122,14 +126,13 @@ echo "<br> session :".$name ;
     </div>
 
 
-    <!-- formulaire de l'étape  2 -->
+    <!-- formulaire de l'étape 2 -->
 
     <div id="step2" class="step" style="display:none;">
 
-        <!-- sauvegarde les données du formulaire etape 1 -->
+        <!-- sauvegarde les données du formulaire de l'étape 1 -->
 
         <?php
-
         var_dump($_POST);
     echo("<br> nameTier :   ".$_POST["nameTier"]) ;
     echo("<br> sauvegarde etape 1");
@@ -147,25 +150,25 @@ echo "<br> session :".$name ;
 ?>
 
         <!--  -->
-        <form action="#" @csrf method="POST" name="form2">
+        <form @csrf method="POST" name="form2">
             <fieldset class="display:inline">
                 <legend> Etape 2 : Entrez les documents</legend>
 
-                <!-- Upload la pièce d'identité -->
+                <!-- Télécharger la pièce d'identité  ou le passeport-->
                 <div class="passport">
                     <label class for="passport">Pièce d'identité/Passeport :</label>
                     <input type="file" id="passport" name="passport" placeholder="file1.pdt"
                         accept="application/pdf, image/*" capture="environment" />
                 </div>
 
-                <!-- Justificatif de facture d'électricité  -->
+                <!-- Télécharger le justificatif de facture d'électricité  -->
                 <div class="facture">
                     <label class for="facture">Facture de EDF :</label>
                     <input type="file" id="facture" name="facture" accept="application/pdf, image/*"
                         capture="environment" />
                 </div>
 
-                <!-- RIB / RIP  -->
+                <!-- Télécharger le RIB / RIP  -->
                 <div class="rib">
                     <label class="rib" for="rib">RIB/RIP :</label>
                     <input type="file" id="rib" name="rib" accept="application/pdf, image/*" capture="environment" />
@@ -173,13 +176,13 @@ echo "<br> session :".$name ;
 
             </fieldset>
             <br />
+
             <!-- les boutons -->
             <div class="button-form">
 
                 <button onclick="previousPage(1)" value="previous" id="previous">Précédent</button>
                 <button onclick="nextPage(3)">Suivant</button>
-                <button onclick="home(2)">Revenir à l'étape 1</button>
-                <button onclick="resetPage(2)">Reset</button>
+                <button onclick="resetForm()">Reset</button>
 
             </div>
         </form>
@@ -200,17 +203,17 @@ echo "<br> session :".$name ;
 ?>
 
         <!-- Début du formulaire  -->
-        <form action="#" @csrf method="POST" name="form3">
+        <form @csrf method="POST" name="form3">
             <fieldset class="display:inline">
                 <legend> Etape 3 : Information du bâtiment</legend>
 
-                <!-- Information du bâtiment -->
+                <!-- Information du bâtiment  le revenu fiscal -->
                 <div class="fiscal">
                     <label class="fiscal" for="fiscal">Revenu fiscal :</label>
                     <input type="number" id="fiscal" name="fiscal" min="0" />
                 </div>
 
-                <!-- Nombre de personne dans le logement -->
+                <!-- Nombre de personne dans le logement/l'habitation -->
                 <div class="nbpersonnes">
                     <label class="nb" for="nbpersonnes">Nombre de personnes:</label>
                     <select name="nbpersonnes" id="nbpersonnes">
@@ -226,7 +229,7 @@ echo "<br> session :".$name ;
                         <option value="10">10</option>
                     </select>
                 </div>
-                <!-- Proprtiétaire ou locataire -->
+                <!-- Statut du résident : Proprtiétaire ou Locataire -->
                 <div class="loc">
                     <label class="loc" for="loc">Statut du résident :</label>
                     <select name="loc" id="loc">
@@ -241,21 +244,20 @@ echo "<br> session :".$name ;
             <!--  les boutons -->
             <div class="button-form">
 
-                <button onclick="previousPage(2)" value="previous">Précédent</button>
+                <button type="submit" onclick="previousPage(2)" value="previous">Précédent</button>
                 <button onclick="nextPage(4)">Suivant</button>
-                <button onclick="home(3)">Revenir à l'étape 1</button>
-                <button onclick="resetPage(3)">Reset</button>
+                <button onclick="resetForm()">Reset tous les champs</button>
             </div>
         </form>
 
     </div>
 
-    <!-- formulaire de l'étape 4 -->
+    <!-- Formulaire de l'étape 4 -->
     <div id="step4" class="step" style="display:none;">
 
         <?php
 
-// sauvegarde les données du formulaire etape 3
+// sauvegarde les données du formulaire de l'étape 3
 
     echo("<br> sauvegarde etape 3");
 
@@ -265,11 +267,11 @@ echo "<br> session :".$name ;
 
 ?>
 
-        <form action="#" @csrf method="POST" namespace="form4">
+        <form @csrf method="POST" namespace="form4">
             <fieldset class="display:inline">
                 <legend> Etape 4 : Choix du chauffe-eau solaire</legend>
 
-                <!--Liste des différents produits  chauffe-eau solaire -->
+                <!--Liste des différents produits de chauffe-eau solaire -->
                 <div class="product">
                     <label class="product" for="product">Produits Chauffe-eau solaire</label>
                     <select name="product" id="product">
@@ -282,14 +284,14 @@ echo "<br> session :".$name ;
                 </div>
 
             </fieldset>
+
             <br />
             <!-- les boutons -->
             <div class="button-form">
 
-                <button onclick="previousPage(3)" value="previous">Précédent</button>
+                <button type="submit" onclick="previousPage(3)" value="previous">Précédent</button>
                 <button onclick="nextPage(5)">Suivant</button>
-                <button onclick="home(4)">Revenir à l'étape 1</button>
-                <button onclick="resetPage(4)">Reset</button>
+                <button onclick="resetForm()">Reset tous les champs</button>
 
             </div>
         </form>
@@ -297,7 +299,7 @@ echo "<br> session :".$name ;
     </div>
 
 
-    <!-- formulaire de l'étape  5 -->
+    <!-- Formulaire de l'étape  5 -->
     <div id="step5" class="step" style="display:none;">
         <div>
             <h1 class="recap">
@@ -320,7 +322,7 @@ $_SESSION["product"] = $_POST["product"];
 
 ?>
 
-                <form action="#" @csrf methode="POST" name="validation">
+                <form @csrf methode="POST" name="validation">
 
                     <h2> Les données saisies</h2>
                     <?php 
@@ -348,15 +350,36 @@ $_SESSION["product"] = $_POST["product"];
         echo "<br> Locataire/Propriétaire :  ".$_SESSION['loc'] ;
         echo "<br> Produit selectionné :  ".$_SESSION['product'] ;
 ?>
+
+                    <!-- Tableau de récapitulatif du Tier -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom du Tier : <?php  echo "<br>  ".$_SESSION['nameTier'];        ?></th>
+                                <th>Adresse :</th>
+                                <th>Code Postal</th>
+                                <th>Ville</th>
+                                <th>Téléphone</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+
+
+                            </tr>
+
+                        </thead>
+
+                    </table>
+
+
+
                     <br />
                     <br />
                     <!-- les boutons -->
                     <div class="button-form">
 
-                        <button onclick="previousPage(4)" value="previous">Précédent</button>
-                        <button onclick="home(5)">Revenir à l'étape 1</button>
-                        <button onclick="resetPage(5)">Reset</button>
-                        <button onclick="validation.php">Valider le formulaire</button>
+                        <button type="submit" onclick="previousPage(4)" value="previous">Précédent</button>
+                        <button onclick="resetForm()">Reset</button>
+                        <button onclick="/validation.php">Valider le formulaire</button>
                         <!-- methode a href -->
                         <a href="validation.php" class="button-form">Validation</a>
 

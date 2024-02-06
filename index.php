@@ -23,7 +23,7 @@ $_SESSION['rib'] =  "file3.pdf";
 $_SESSION['fiscal'] =  "1362516";
 $_SESSION['nbpersonnes'] =  1;
 $_SESSION['loc'] =  "propriétaire";
-$_SESSION['product'] =  "100L";
+$_SESSION['product'] =  "150L";
 
 
 // Différentes étapes du formulaire

@@ -127,80 +127,6 @@ function previousPage(actualPage) {
   previousPageElement.style.display = "block";
 }
 
-// Revenir à la première page du formulaire
-function home(actualPage) {
-  const isValid = validerPage(actualPage);
-
-  if (!isValid) {
-    return;
-  }
-  const currentPage = document.getElementById("step" + actualPage);
-  const previousPageElement = document.getElementById("step1");
-
-  console.log("currentPage :", currentPage);
-  console.log("previousPageElement :", previousPageElement);
-
-  // Vérification si les éléments existent
-  if (!currentPage || !previousPageElement) {
-    console.error(
-      "Element not found :",
-      !currentPage ? "currentPage" : "previousPageElement"
-    );
-    return;
-  }
-
-  currentPage.style.display = "none";
-  previousPageElement.style.display = "block";
-}
-
-//réinitialisé toutes les pages web
-function resetPage(actualPage) {
-  switch (actualPage) {
-    case 1: {
-      //etape 1
-      document.getElementById("nameTier").value = "";
-      document.getElementById("address1").value = "";
-      document.getElementById("zip").value = "";
-      document.getElementById("city").value = "";
-      document.getElementById("phone").value = "";
-      document.getElementById("mobile").value = "";
-      document.getElementById("Email").value = "";
-      document.getElementById("country").value = "";
-      document.getElementById("dpt").value = "";
-
-      return;
-    }
-
-    case 2: {
-      // etape 2
-      document.getElementById("passport").value = "";
-      document.getElementById("facture").value = "";
-      document.getElementById("rib").value = "";
-      return;
-    }
-
-    case 3: {
-      // etape3
-
-      document.getElementById("fiscal").value = "";
-      document.getElementById("nbpersonnes").value = 1;
-      document.getElementById("loc").value = "Propriétaire";
-      return;
-    }
-
-    case 4: {
-      // etape3
-      document.getElementById("product").value = "";
-      return;
-    }
-
-    default:
-      break;
-  }
-
-  // etape4
-}
-
 // regex tel
 
 isValidFrenchPhoneNumber = (phonenumber) => {
@@ -245,31 +171,18 @@ function validerForm() {
 }
 
 // Réinitialiser tous les champs
-function resetAll() {
+function resetForm() {
   //etape 1
-  document.getElementById("nameTier").value = "";
-  document.getElementById("address1").value = "";
-  document.getElementById("zip").value = "";
-  document.getElementById("city").value = "";
-  document.getElementById("phone").value = "";
-  document.getElementById("mobile").value = "";
-  document.getElementById("Email").value = "";
-  document.getElementById("country").value = "";
-  document.getElementById("dpt").value = "";
+  document.getElementById("form1").reset();
 
   // etape 2
-  document.getElementById("passport").value = "";
-  document.getElementById("facture").value = "";
-  document.getElementById("rib").value = "";
+  document.getElementById("form2").reset();
 
   // etape3
-
-  document.getElementById("fiscal").value = "";
-  document.getElementById("nbpersonnes").value = 1;
-  document.getElementById("loc").value = "Propriétaire";
+  document.getElementById("form3").reset();
 
   // etape4
-  document.getElementById("product").value = "";
+  document.getElementById("form4").reset();
 }
 
 // fonction update

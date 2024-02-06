@@ -12,76 +12,67 @@ input {
   margin: 0.4rem;
 }
 
+/* * {
 
-
-/* section  div .display-etape1 {
-  background-color: orange;
-  margin: 50px;
-  height: 30px;
-  width: 100px;
-  padding : 30px;
+  margin: 0;
+  padding: 0;
+  background-color: beige;
+  list-style: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 } */
+/* barre horizontal */
 
-section div ul {
-
-  background-color:#CFCFCF;
-  height: 15px;
-  width: 600px;
-
+section ul {
   display: flex;
-  flex :1;
- list-style-type: none; /*  enlever les petits points  */
-  align-items: center;
+  /* background-color: beige; */
+
+  border: 3px solid #000;
+  list-style: none;
+  height:20px;
+  width: 700px;
+  position: relative;
+align-items: center;
 justify-content: space-between;
-
-border-style: groove;
-border-color: #000;
-top: 0;
-margin: 100px;
-padding: 0;
-
+/* top: 0;
+right: 0; */
+left: 100px;
+margin: 50px;
 
 }
 
-section ul .step {
-  height: 30px;
-  width: 30px;
-font-size: 1.9rem;
-
-border-radius: 100%;
-border-style: groove;
-border-color: red;
-color:#000;
-background-color: white;
-padding-left: 10px;
-padding-top: 10px;
-padding-bottom: 10px;
-
-
-
-}
-
-.breadcrumb {
-
-  padding: 0 .5rem;
-  background-color: blue;
-}
-
-/* .breadcrumb ul {
-
+/* gestion du cercle et de son contenu */
+ul .step {
 
  
+  display: flex;
+  background-color: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+ 
+  color: blue;
+align-items: center;
+justify-content: center;
+border:3px solid #000;
 
-} */
+margin-right: 100px;
+position: relative;
+right: 48px;
 
-.breadcrumb li:not(:last-child) ::after {
-
-
-  display: inline-flex;
-  background-color: purple;
-  
 }
 
+.breadcrumb ::after{
 
 
+background-position: 100px;
+  background-color: crimson;
+  height: 20px;
+  width: 100px;
+
+}
+
+.breadcrumb ::before {
+
+  background-color: green;
+}

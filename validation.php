@@ -1,5 +1,11 @@
 <script src="./commonjs/function.js"></script>
 
+<div id="validation" class="step-validation" style="display:none;">
+
+
+</div>
+
+
 <?php
 session_start();
 
@@ -16,6 +22,8 @@ var_dump("<br> test validation début");
 
     var_dump("<br> ok validation") ;
 
+
+    echo "<br> nameTier :".$_POST["nameTier"] ;
     try {
 
         /* 
@@ -28,30 +36,30 @@ var_dump("<br> test validation début");
         //etape 1
 
         $nameTier = addslashes(TRIM($_SESSION['nameTier']));
-        $address1 = TRIM($_SESSION['address1']);
-        $zip = intval($_SESSION['zip']);
-        $city = TRIM($_SESSION['city']);
-        $phone = TRIM($_SESSION['phone']);
-        $mobile = TRIM($_SESSION['mobile']);
-        $Email = TRIM($_SESSION['Email']);
-        $country = TRIM($_SESSION['country']);
-        $dpt = TRIM($_SESSION['dpt']);
-        $create_time = date('d-m-y h:i:s');
-        $update_time = $create_time ;
+        $address1 = addslashes(TRIM($_SESSION['address1']));
+        $zip = addslashes(intval($_SESSION['zip']));
+        $city = addslashes(TRIM($_SESSION['city']));
+        $phone = addslashes(TRIM($_SESSION['phone']));
+        $mobile = addslashes(TRIM($_SESSION['mobile']));
+        $Email = addslashes(TRIM($_SESSION['Email']));
+        $country = addslashes(TRIM($_SESSION['country']));
+        $dpt = addslashes(TRIM($_SESSION['dpt']));
+        $create_time = addslashes(date('d-m-y h:i:s'));
+        $update_time = addslashes($create_time );
 
         // etape 2
-        $passport = TRIM($_SESSION['passport']);
-        $facture = TRIM($_SESSION['facture']);
-        $rib = TRIM($_SESSION['rib']);
+        $passport = addslashes(TRIM($_SESSION['passport']));
+        $facture = addslashes(TRIM($_SESSION['facture']));
+        $rib = addslashes(TRIM($_SESSION['rib']));
 
         // etape 3
 
-        $fiscal = TRIM($_SESSION['fiscal']);
-        $nbpersonnes = TRIM($_SESSION['nbpersonnes']);
-        $loc = TRIM($_SESSION['loc']);
+        $fiscal = addslashes(TRIM($_SESSION['fiscal']));
+        $nbpersonnes = addslashes(TRIM($_SESSION['nbpersonnes']));
+        $loc = addslashes(TRIM($_SESSION['loc']));
 
         // etape 4
-        $product = TRIM($_SESSION['product']);
+        $product = addslashes(TRIM($_SESSION['product']));
 
 
 

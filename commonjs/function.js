@@ -1,43 +1,45 @@
 // var db = openDataBase("ProjetWizard", "1.0", "description, 5 * 1024 *1024"); // 5MB
 
-async function getDatas1() {
-  let dataEtape1 = {
-    nameTier: "",
-    adress: "",
-    zip: "",
-    city: "",
-    phone1: null,
-    phone2: null,
-    email: "",
-    country: "",
-    dpt: "",
-  };
+// async function getDatas1() {
+//   let dataEtape1 = {
+//     nameTier: "",
+//     adress: "",
+//     zip: "",
+//     city: "",
+//     phone1: null,
+//     phone2: null,
+//     email: "",
+//     country: "",
+//     dpt: "",
+//   };
 
-  dataEtape1.nameTier = await document.getElementById("name").value;
-  dataEtape1.adress = await document.getElementById("adress").value;
-  dataEtape1.zip = await document.getElementById("zip").value;
-  dataEtape1.city = await document.getElementById("city").value;
-  dataEtape1.phone1 = await document.getElementById("phone1");
-  dataEtape1.phone2 = await document.getElementById("phone2");
-  dataEtape1.email = await document.getElementById("email").value;
-  dataEtape1.country = await document.getElementById("country").value;
-  dataEtape1.dpt = await document.getElementById("dpt").value;
+//   dataEtape1.nameTier = await document.getElementById("name").value;
+//   dataEtape1.adress = await document.getElementById("adress").value;
+//   dataEtape1.zip = await document.getElementById("zip").value;
+//   dataEtape1.city = await document.getElementById("city").value;
+//   dataEtape1.phone1 = await document.getElementById("phone1");
+//   dataEtape1.phone2 = await document.getElementById("phone2");
+//   dataEtape1.email = await document.getElementById("email").value;
+//   dataEtape1.country = await document.getElementById("country").value;
+//   dataEtape1.dpt = await document.getElementById("dpt").value;
 
-  window.localStorage.setItem("etape1", dataEtape1);
-  console.log("dataEtape1", dataEtape1);
+//   window.localStorage.setItem("etape1", dataEtape1);
+//   console.log("dataEtape1", dataEtape1);
 
-  // console.log("db", db);
+// console.log("db", db);
 
-  return dataEtape1;
-}
+//   return dataEtape1;
+// }
 
 // définition des fonctions des étapes
 function validerPage1() {
   //Ajoutez votre logique de validation pour l'étape 1 ici
+
   return true;
 }
 function validerPage2() {
   //Ajoutez votre logique de validation pour l'étape 2 ici
+
   return true;
 }
 function validerPage3() {
@@ -53,7 +55,7 @@ function validerPage5() {
   return true;
 }
 
-// valider les pages du formulaire
+// Valider les pages du formulaire
 
 function validerPage(actualPage) {
   switch (actualPage) {
@@ -98,6 +100,9 @@ function nextPage(actualPage) {
 
   currentPage.style.display = "none";
   nextPageElement.style.display = "block";
+
+  updateProgressBar(actualPage, isValid);
+  updateBreadcrumb(actualPage);
 }
 
 // Revenir à la page précédente
@@ -125,6 +130,97 @@ function previousPage(actualPage) {
 
   currentPage.style.display = "none";
   previousPageElement.style.display = "block";
+
+  updateProgressBar(actualPage, isValid);
+  updateBreadcrumb(actualPage);
+}
+
+// validation du formulaire
+
+function validerForm() {
+  return true;
+}
+
+// Réinitialiser tous les champs des formalaires
+function resetForm(actualPage) {
+  //etape 1
+  document.getElementById("form1").reset();
+
+  // etape 2
+  document.getElementById("form2").reset();
+
+  // etape3
+  document.getElementById("form3").reset();
+
+  // etape4
+  document.getElementById("form4").reset();
+
+  // Redirigez vers la première étape
+  const currentStep = document.getElementById("step" + actualPage); // ou l'étape actuelle
+  const firstStepElement = document.getElementById("step1");
+  currentStep.style.display = "none";
+  firstStepElement.style.display = "block";
+
+  // Réinitialisez également toute autre information pertinente, comme la barre de progression et le fil d'ariane.
+  updateProgressBar(1, true);
+  updateBreadcrumb(1);
+}
+
+// Gestion de la bar de progression du formulaire
+let progressBar = document.getElementById("myProgressBar");
+
+function updateProgress(progress) {
+  progressBar.value = progress;
+}
+
+// Stockage de la progression de la barre de progression
+function updateProgressBar(step, isValid) {
+  const totalSteps = 5;
+  const progressPercentage = (step / totalSteps) * 100;
+
+  const progressBar = document.getElementById("progress");
+
+  progressBar.style.width = progressPercentage + "%";
+
+  progressBar.style.backgroundColor = isValid ? "green" : "red";
+
+  // Stockage de la progression dans le localStorage
+  localStorage.setItem("progressPercentage", progressPercentage);
+
+  // Stockage de l'étape active dans le localStorage
+  localStorage.setItem("activeStep", step);
+}
+
+// Récupération de la progression de la barre de progression lors du chargement de la page
+window.onload = function () {
+  const progressPercentage = localStorage.getItem("progressPercentage");
+  if (progressPercentage === null) {
+    // Si c'est la première fois que la page est chargée
+    // Nous mettons Ã  jour la barre de progression et le fil d'ariane à l'étape "Nom du tiers"
+    updateProgressBar(1, true);
+    updateBreadcrumb(1);
+  } else {
+    // Sinon, nous récupÃ©rons l'étape sauvegardée dans le localStorage
+    const progressBar = document.getElementById("progress");
+    const percentageDisplay = document.getElementById("percentage");
+    progressBar.style.width = progressPercentage + "%";
+    // percentageDisplay.textContent = progressPercentage + '%';
+  }
+};
+
+// Stockage de l'étape active du fil d'ariane
+function updateBreadcrumb(step) {
+  for (let i = 1; i <= 5; i++) {
+    const breadcrumbStep = document.getElementById("breadcrumb-step" + i);
+    breadcrumbStep.classList.remove("active");
+  }
+
+  const activeBreadcrumbStep = document.getElementById(
+    "breadcrumb-step" + step
+  );
+  activeBreadcrumbStep.classList.add("active");
+  // Stockage de l'étape active dans le localStorage
+  localStorage.setItem("activeStep", step);
 }
 
 // regex tel
@@ -163,28 +259,3 @@ isValidFrenchPhoneNumber = (phonenumber) => {
 
   // return phonenumber.match(metropolitanFranceReg);
 };
-
-// validation
-
-function validerForm() {
-  return true;
-}
-
-// Réinitialiser tous les champs
-function resetForm() {
-  //etape 1
-  document.getElementById("form1").reset();
-
-  // etape 2
-  document.getElementById("form2").reset();
-
-  // etape3
-  document.getElementById("form3").reset();
-
-  // etape4
-  document.getElementById("form4").reset();
-}
-
-// fonction update
-
-function editData($data) {}

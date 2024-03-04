@@ -16,7 +16,7 @@ include("./hero.php");
 <div id="wizard">
     <!-- formualire de l'étape 1 -->
     <div id="step1" class="step">
-        <form action="#" @csrf method="POST" name="form1">
+        <form action="#" @csrf method="POST" name="form1" id="form1">
 
             <fieldset class="display:inline">
                 <legend> Etape1 : Nom du tiers</legend>
@@ -115,9 +115,12 @@ include("./hero.php");
             <!-- les boutons -->
             <div class="button-form">
 
-                <button type="submit" onclick="nextPage(2)" value="suivant" name="suivant">Suivant</button>
-                <!-- <input type="submit" onclick="nextPage(2)" value="suivant input" name="suivant"> -->
-                <button onclick="resetAll()">Reset</button>
+                <button class="button-action" type="submit" onclick="nextPage(2)" value="Suivant"
+                    name="suivant">Suivant</button>
+                <button class="button-action" type="submit" onclick="resetForm(1)" value="reset">Reset</button>
+                <!-- <input class="button-action" type="submit" onclick="nextPage(2)" value="Suivant" name="suivant">
+
+                <input class="button-action" type="submit" onclick="resetForm(1)" value="Reset"> -->
 
             </div>
 
@@ -133,9 +136,9 @@ include("./hero.php");
         <!-- sauvegarde les données du formulaire de l'étape 1 -->
 
         <?php
-        var_dump($_POST);
-    echo("<br> nameTier :   ".$_POST["nameTier"]) ;
-    echo("<br> sauvegarde etape 1");
+        // var_dump($_POST);
+    // echo("<br> nameTier :   ".$_POST["nameTier"]) ;
+    // echo("<br> sauvegarde etape 1");
 
     $_SESSION["nameTier"] = $_POST["nameTier"] ;
     $_SESSION["address1"] = $_POST["address1"] ;
@@ -150,7 +153,7 @@ include("./hero.php");
 ?>
 
         <!--  -->
-        <form @csrf method="POST" name="form2">
+        <form @csrf method="POST" name="form2" id="form2">
             <fieldset class="display:inline">
                 <legend> Etape 2 : Entrez les documents</legend>
 
@@ -180,9 +183,14 @@ include("./hero.php");
             <!-- les boutons -->
             <div class="button-form">
 
-                <button onclick="previousPage(1)" value="previous" id="previous">Précédent</button>
-                <button onclick="nextPage(3)">Suivant</button>
-                <button onclick="resetForm()">Reset</button>
+                <button class="button-action" onclick="previousPage(1)" value="previous"
+                    id="previous">Précédent</button>
+                <button class="button-action" type="submit" onclick="nextPage(3)" value="next">Suivant</button>
+                <button class="button-action" type="submit" onclick="resetForm(2)" value="reset">Reset</button>
+
+                <!-- <input class="button-action" onclick="previousPage(1)" value="Précédent" id="previous">
+                <input class="button-action" type="submit" onclick="nextPage(3)" value="Suivant">
+                <input class="button-action" type="submit" onclick="resetForm(2)" value="Reset"> -->
 
             </div>
         </form>
@@ -194,8 +202,8 @@ include("./hero.php");
         <?php
 
 // sauvegarde les données du formulaire etape 2
-    echo("<br> ".$_POST["passport"]);
-    echo("<br> sauvegarde etape 2");
+    // echo("<br> ".$_POST["passport"]);
+    // echo("<br> sauvegarde etape 2");
 
     $_SESSION["passport"] = $_POST["passport"] ;
     $_SESSION["facture"] = $_POST["facture"] ;
@@ -203,7 +211,7 @@ include("./hero.php");
 ?>
 
         <!-- Début du formulaire  -->
-        <form @csrf method="POST" name="form3">
+        <form @csrf method="POST" name="form3" id="form3">
             <fieldset class="display:inline">
                 <legend> Etape 3 : Information du bâtiment</legend>
 
@@ -244,9 +252,16 @@ include("./hero.php");
             <!--  les boutons -->
             <div class="button-form">
 
-                <button type="submit" onclick="previousPage(2)" value="previous">Précédent</button>
-                <button onclick="nextPage(4)">Suivant</button>
-                <button onclick="resetForm()">Reset tous les champs</button>
+                <button class="button-action" type="submit" onclick="previousPage(2)"
+                    value="previous">Précédent</button>
+                <button class="button-action" type="submit" onclick="nextPage(4)" value="next">Suivant</button>
+                <button class="button-action" type="submit" onclick="resetForm(3)" value="reset">Reset</button>
+
+                <!-- <input class="button-action" type="submit" onclick="previousPage(2)" value="Précédent">
+                <input class="button-action" type="submit" onclick="nextPage(4)" value="Suivant">
+                <input class="button-action" type="submit" onclick="resetForm(3)" value="Reset"> -->
+
+
             </div>
         </form>
 
@@ -259,7 +274,7 @@ include("./hero.php");
 
 // sauvegarde les données du formulaire de l'étape 3
 
-    echo("<br> sauvegarde etape 3");
+    // echo("<br> sauvegarde etape 3");
 
     $_SESSION["fiscal"] = $_POST["fiscal"] ;
     $_SESSION["nbpersonnes"] = $_POST["nbpersonnes"] ;
@@ -267,7 +282,7 @@ include("./hero.php");
 
 ?>
 
-        <form @csrf method="POST" namespace="form4">
+        <form @csrf method="POST" namespace="form4" id="form4">
             <fieldset class="display:inline">
                 <legend> Etape 4 : Choix du chauffe-eau solaire</legend>
 
@@ -289,9 +304,13 @@ include("./hero.php");
             <!-- les boutons -->
             <div class="button-form">
 
-                <button type="submit" onclick="previousPage(3)" value="previous">Précédent</button>
-                <button onclick="nextPage(5)">Suivant</button>
-                <button onclick="resetForm()">Reset tous les champs</button>
+                <button class="button-action" type="submit" onclick="previousPage(3)"
+                    value="previous">Précédent</button>
+                <button class="button-action" type="submit" onclick="nextPage(5)" value="next">Suivant</button>
+                <button class="button-action" type="submit" onclick="resetForm(4)" value="reset">Reset</button>
+                <!-- <input class="button-action" type="submit" onclick="previousPage(3)" value="Précédent">
+                <input class="button-action" type="submit" onclick="nextPage(5)" value="Suivant">
+                <input class="button-action" type="submit" onclick="resetForm(4)" value="Reset"> -->
 
             </div>
         </form>
@@ -322,9 +341,8 @@ $_SESSION["product"] = $_POST["product"];
 
 ?>
 
-                <form @csrf methode="POST" name="validation">
+                <form @csrf methode="POST" name="validation" action="validation.php">
 
-                    <h2> Les données saisies</h2>
                     <?php 
 
 /*  affiche les informations du  Tier
@@ -333,35 +351,52 @@ $_SESSION["product"] = $_POST["product"];
  * 
 */
             
-        echo "<br> Nom du tier :  ".$_SESSION["nameTier"];        
-        echo "<br> Addresse :  ".$_SESSION['address1'] ;
-        echo "<br> Code postal :  ".$_SESSION['zip'];
-        echo "<br> Ville :  ".$_SESSION['city'] ;
-        echo "<br> Telephone :  ".$_SESSION['phone'];
-        echo "<br> Mobile :  ".$_SESSION['mobile'] ;
-        echo "<br> EMail :  ".$_SESSION['Email'] ;
-        echo "<br> Pays :  ".$_SESSION['country'] ;
-        echo "<br> Departement/Canton :  ".$_SESSION['dpt'] ;
-        echo "<br> Pièce d'identité / Passeport :  ".$_SESSION['passport'] ;
-        echo "<br> Facture :  ".$_SESSION['facture'] ;
-        echo "<br> Rib/Rip :  ".$_SESSION['rib'] ;
-        echo "<br> Revenu fiscal :  ".$_SESSION['fiscal'] ;
-        echo "<br> Nombre de personnes :  ".$_SESSION['nbpersonnes'] ;
-        echo "<br> Locataire/Propriétaire :  ".$_SESSION['loc'] ;
-        echo "<br> Produit selectionné :  ".$_SESSION['product'] ;
+        // echo "<br> Nom du tier :  ".$_SESSION["nameTier"];        
+        // echo "<br> Addresse :  ".$_SESSION['address1'] ;
+        // echo "<br> Code postal :  ".$_SESSION['zip'];
+        // echo "<br> Ville :  ".$_SESSION['city'] ;
+        // echo "<br> Telephone :  ".$_SESSION['phone'];
+        // echo "<br> Mobile :  ".$_SESSION['mobile'] ;
+        // echo "<br> EMail :  ".$_SESSION['Email'] ;
+        // echo "<br> Pays :  ".$_SESSION['country'] ;
+        // echo "<br> Departement/Canton :  ".$_SESSION['dpt'] ;
+        // echo "<br> Pièce d'identité / Passeport :  ".$_SESSION['passport'] ;
+        // echo "<br> Facture :  ".$_SESSION['facture'] ;
+        // echo "<br> Rib/Rip :  ".$_SESSION['rib'] ;
+        // echo "<br> Revenu fiscal :  ".$_SESSION['fiscal'] ;
+        // echo "<br> Nombre de personnes :  ".$_SESSION['nbpersonnes'] ;
+        // echo "<br> Locataire/Propriétaire :  ".$_SESSION['loc'] ;
+        // echo "<br> Produit selectionné :  ".$_SESSION['product'] ;
 ?>
 
                     <!-- Tableau de récapitulatif du Tier -->
                     <table>
                         <thead>
                             <tr>
-                                <th>Nom du Tier : <?php  echo "<br>  ".$_SESSION['nameTier'];        ?></th>
-                                <th>Adresse :</th>
-                                <th>Code Postal</th>
-                                <th>Ville</th>
-                                <th>Téléphone</th>
-                                <th>Mobile</th>
-                                <th>Email</th>
+                                <th class="tab">Nom du Tier : <?php  echo $_SESSION['nameTier']; ?></th>
+                                <th class="tab">Adresse : <?php  echo  $_SESSION['address1']; ?></th>
+                                <th class="tab">Code Postal : <?php  echo $_SESSION['zip'];  ?></th>
+                                <th class="tab">Ville : <?php  echo $_SESSION['city']; ?></th>
+                                <th class="tab">Téléphone : <?php  echo $_SESSION['phone'];  ?></th>
+                                <th class="tab">Mobile : <?php  echo $_SESSION['mobile']; ?></th>
+                                <th class="tab">Email : <?php  echo $_SESSION['Email']; ?></th>
+                                <th class="tab">Pays : <?php  echo $_SESSION['country']; ?></th>
+                                <th class="tab">Département/Canton : <?php  echo $_SESSION['dpt']; ?>
+                                </th>
+                                <th class="tab">Pièce d'identité/Passeport :
+                                    <?php  echo $_SESSION['passport']; ?></th>
+                                <th class="tab">Facture de EDF : <?php  echo $_SESSION['facture']; ?>
+                                </th>
+                                <th class="tab">RIB/RIP : <?php  echo $_SESSION['rib'];  ?></th>
+                                <th class="tab">Revenu fiscal : <?php  echo $_SESSION['fiscal'];  ?></th>
+                                <th class="tab">Nombre de personnes :
+                                    <?php  echo $_SESSION['nbpersonnes'];        ?></th>
+                                <th class="tab">Statut du résident : <?php  echo $_SESSION['loc']; ?>
+                                </th>
+                                <th class="tab">Produits Chauffe-eau solaire :
+                                    <?php  echo $_SESSION['product']; ?></th>
+
+
 
 
                             </tr>
@@ -377,14 +412,25 @@ $_SESSION["product"] = $_POST["product"];
                     <!-- les boutons -->
                     <div class="button-form">
 
-                        <button type="submit" onclick="previousPage(4)" value="previous">Précédent</button>
-                        <button onclick="resetForm()">Reset</button>
-                        <button onclick="/validation.php">Valider le formulaire</button>
+                        <!-- <button class="button-action" type="submit" onclick="previousPage(4)"
+                            value="previous">Précédent</button>
+                        <button class="button-action" type="submit" onclick="resetForm(5)" value="reset">Reset</button>
+                        <button type="submit" class="button-action" value="envoyer" name="envoyer"
+                            onclick="validerForm()">Valider le
+                            formulaire</button> -->
+                        <input class="button-action" type="submit" onclick="previousPage(4)" value="Précédent">
+                        <input class="button-action" type="submit" onclick="resetForm(5)" value="Reset">
+                        <input class="button-action" type="submit" class="button-action" value="Valider" name="Valider">
+
+
+
                         <!-- methode a href -->
-                        <a href="validation.php" class="button-form">Validation</a>
+                        <!-- <a href="/validation.php" class="button-action">Validation</a> -->
+
 
 
                     </div>
+
                 </form>
 
 

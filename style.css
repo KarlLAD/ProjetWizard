@@ -1,13 +1,14 @@
 
-
+/* étiquette */
 
 legend {
   /* background-color: #000; */
-  background-color: green;
+  background-color: red;
   color: #fff;
   padding: 3px 6px;
 }
 
+/* gestion des input */
 input {
   margin: 0.4rem;
 }
@@ -23,9 +24,11 @@ input {
 } */
 /* barre horizontal */
 
-section ul {
+/* section .breadcrumb ul   {
+  
   display: flex;
-  /* background-color: beige; */
+  flex: 1;
+  background-color: beige;
 
   border: 3px solid #000;
   list-style: none;
@@ -34,24 +37,25 @@ section ul {
   position: relative;
 align-items: center;
 justify-content: space-between;
-/* top: 0;
-right: 0; */
+
 left: 100px;
 margin: 50px;
 
-}
+} */
 
 /* gestion du cercle et de son contenu */
-ul .step {
+/* ul .breadcrumb-step {
 
  
   display: flex;
+  flex: 1;
   background-color: white;
   height: 30px;
   width: 30px;
   border-radius: 50%;
  
   color: blue;
+  font-weight: bold;
 align-items: center;
 justify-content: center;
 border:3px solid #000;
@@ -60,19 +64,191 @@ margin-right: 100px;
 position: relative;
 right: 48px;
 
+} */
+
+
+.progress-container {
+    width: 50%;
+    margin: 20px auto;
 }
 
-.breadcrumb ::after{
+.progress-bar {
+
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    /* background-color: green; */
+    background-color: blue;
+    width: 0;
+    height: 100%;
+    transition: width 0.5s;
+}
+
+.breadcrumb {
+
+  /* background-color: brown; */
+    /* display: flex; */
+    /* flex: 1; */
+    /* justify-content: space-between; */
+    align-items: center;
+    padding: 10px;
+
+    border-color: #000;
+  
+}
+
+ .steps {
+
+  /* background-color: antiquewhite; */
+  display: flex;
+  flex: 1;
+  list-style: none;
+  font-weight: bold;
+  color: blue;
+  justify-content: space-between;
+
+ 
+  /* margin-top: 50px; */
+  
+}
 
 
-background-position: 100px;
-  background-color: crimson;
-  height: 20px;
-  width: 100px;
+.breadcrumb-step {
+
+  background-color: white;
+
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    /* flex: 1; */
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+
+    /* width: calc(90% / 8 - 10px); */
+  border: 3px solid #000;
+    align-items: center;
+    justify-content: center;
+
+
+   
+}
+
+.breadcrumb-step.active {
+    font-weight: bold;
+    /* color: green; */
+    color: red;
+}
+
+
+
+
+
+
+
+
+
+
+/* .breadcrumb li:hover:not(.active) {
+background-color: gray;
+
+
+} */
+
+
+
+
+
+
+/* boutons */
+
+/* style du button  début 1er étape*/
+.button-form {
+
+  /* background-color: green; */
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+margin: 10px;
+cursor: pointer;
+  
+justify-content: center ;
+
+
+
 
 }
 
-.breadcrumb ::before {
+.button-action {
+  background-color: aquamarine;
+  height: 30px;
+  width: 200px;
+  margin-left:20px;
 
-  background-color: green;
+  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+
+
 }
+
+/* 2éme étape : effet souris sur le bouton*/
+.button-action:hover {
+  background-color: rgb(0, 221, 255);
+}
+/* 3éme étape */
+.button-action:active {
+  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* tableau récapitulatif */
+
+.tab {
+background-color: beige;
+display: flex;
+/* align-items: center; */
+justify-content: center;
+
+margin: 20px;
+
+
+}
+
+
+.button-test {
+  display: flex;
+  flex: 1;
+  border: 0;
+  /* height: 50px;
+  width: 220px; */
+ 
+  /* padding: 1rem 10px 1rem 2.5rem; */
+  font-size: 1rem;
+  text-align: start ;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 30px;
+  /* background-color: rgba(220, 176, 0, 0.991); */
+  background-color: aqua;
+  /* background-image: linear-gradient(
+    to top left,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 30%,
+    rgba(0, 0, 0, 0)
+  ); */
+  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+    inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+/* 2éme étape : effet souris sur le bouton*/
+.Choose:hover {
+  background-color: rgb(0, 221, 255);
+}
+/* 3éme étape */
+.Choose:active {
+  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+/* fin style du button*/
